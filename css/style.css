@@ -32,7 +32,9 @@ body {
 /*
  * Header
  */
-
+.header {
+	margin-bottom: 64px;
+}
 .nav-masthead .nav-link {
   padding: .25rem 0;
   font-weight: 700;
@@ -67,3 +69,6 @@ body {
           font-size: 3.5rem;
         }
       }
+	  a {
+		  color: white;
+	  }

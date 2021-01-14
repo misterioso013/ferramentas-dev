@@ -15,20 +15,21 @@
    <body class="d-flex h-100 text-center text-white bg-dark">
     
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
+  <header class="header">
     <div>
       <h3 class="float-md-start mb-0">Ferramentas Dev</h3>
       <nav class="nav nav-masthead justify-content-center float-md-end">
-        <a class="nav-link active" aria-current="page" href="#">Página Inicial</a>
-        <a class="nav-link" href="#ferramentas">Ferramentas</a>
-        <a class="nav-link" href="#sobre">Sobre Nós</a>
+        <a class="nav-link" aria-current="page" href="../index.html">Página Inicial</a>
+        <a class="nav-link active" href="../index.html#ferramentas">Ferramentas</a>
+        <a class="nav-link" href="../index.html#sobre">Sobre Nós</a>
+		<a class="nav-link" href="../blog">Blog</a>
       </nav>
     </div>
   </header>
 
   <main class="px-3">
-    <h1>Cover your page.</h1>
-    <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+    <h1>Gerador de border-radius CSS</h1>
+    <p class="lead">Esse é o gerador CSS de border-radius onde você vai conseguir visualizar como os valores afetam os elementos abaixo e no final você poderá copiar seu código CSS. Crie você mesmo o seu visualizador de border-radius, <a href="https://github.com/florinpop17/app-ideas/blob/master/Projects/1-Beginner/Border-Radius-Previewer.md" target="_blank">aqui.</a></p>
   
  
 
@@ -41,14 +42,28 @@
   <input class="form-check-input" type="checkbox" id="switch">
   <label class="form-check-label" for="switch">Definir valores diferentes para cada lado</label>
 </div>
+<hr>
 <div class='all'>
  <label for="all" class="form-label">Borda com tamanho proporcional</label>
 <input type="range" class="form-range" id="all" step="1" min="0" max="300">
   </div>
+  
+  <!-- Switch checked -->
+  <div class='avancado' style="display:none;">
+ <label for="topleft" class="form-label">Borda superior esquerda</label>
+<input type="range" class="form-range" id="topleft" step="1" min="0" max="300">
+ <label for="topright" class="form-label">Borda superior direita</label>
+<input type="range" class="form-range" id="topright" step="1" min="0" max="300">
+ <label for="bottomleft" class="form-label">Borda inferior direita</label>
+<input type="range" class="form-range" id="bottomleft" step="1" min="0" max="300">
+ <label for="bottomright" class="form-label">Borda inferior esquerda</label>
+<input type="range" class="form-range" id="bottomright" step="1" min="0" max="300">
+  </div>
+  
   </div>
   </div>
     <div class="col-md-6">
-     <div class="p-3 border bg-light aplicar">
+     <div class="p-3 border bg-light aplicar" style="margin-bottom: 30px;">
 	 Aplicar border-radius em uma tag div
 	 </div>
     </div>
@@ -95,22 +110,74 @@
 	})
 	function checked(){
 		$(".all").css("display","none");
+		$(".avancado").css("display","block");
 	}
 	function nochecked(){
 		$(".all").css("display","block");
+		$(".avancado").css("display","none");
 	}
+	// Criar borda proporcional
 		$("#all").on('change mousemove',function(){
 		var valor = $("#all").val();
 		$(".aplicar").css("border-radius",valor+"px")
 		$("#result").val("border-radius: "+valor+"px;")
 		})
 		
+		// Criar borda avancada hehe
+		$("#topleft").on('change mousemove',function(){
+		var topleft = $("#topleft").val();
+		var topright = $("#topright").val();
+		var bottomleft = $("#bottomleft").val();
+		var bottomright = $("#bottomright").val();
+		send(topleft,topright,bottomleft,bottomright)
+		})
+		$("#topright").on('change mousemove',function(){
+		var topleft = $("#topleft").val();
+		var topright = $("#topright").val();
+		var bottomleft = $("#bottomleft").val();
+		var bottomright = $("#bottomright").val();
+		send(topleft,topright,bottomleft,bottomright)
+		})
+		$("#bottomleft").on('change mousemove',function(){
+		var topleft = $("#topleft").val();
+		var topright = $("#topright").val();
+		var bottomleft = $("#bottomleft").val();
+		var bottomright = $("#bottomright").val();
+		send(topleft,topright,bottomleft,bottomright)
+		})
+		$("#bottomright").on('change mousemove',function(){
+		var topleft = $("#topleft").val();
+		var topright = $("#topright").val();
+		var bottomleft = $("#bottomleft").val();
+		var bottomright = $("#bottomright").val();
+		send(topleft,topright,bottomleft,bottomright)
+		})
 		
-	})
+	function send(b1,b2,b3,b4){
+		
+		$(".aplicar").css("border-radius",`${b1}px ${b2}px ${b3}px ${b4}px`)
+		$("#result").val(`border-radius: ${b1}px ${b2}px ${b3}px ${b4}px;`)
+	}
 	
+	// Editando manualmente
+	$("#result").on('keyup',function(){
+		$(".aplicar").attr("style",$("#result").val())
+		})
+		
+	// Copiando
+	function copy() {
+  var copyText = document.querySelector("#result");
+  copyText.select();
+  document.execCommand("copy");
+  alert("CSS copiado com sucesso!")
+}
+
+document.querySelector("#result").addEventListener("dblclick", copy);
+	})
+	// Ativar o Popover do Bootstrap
 	var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-  return new bootstrap.Popover(popoverTriggerEl)
+	var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+	  return new bootstrap.Popover(popoverTriggerEl)
 })
 	</script>
   </body>
